@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project info -->
+    <groupId>com.example</groupId>
+    <artifactId>OrderSystemDesign</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- submodules-->
+    <modules>
+        <module>frame</module>
+    </modules>
+
+    <!-- 版本属性 -->
+    <properties>
+        <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spring.boot.version>2.5.5</spring.boot.version>
+        <spring.cloud.version>2020.0.4</spring.cloud.version>
+        <alibaba.cloud.version>2021.1</alibaba.cloud.version>
+
+        <lombok.version>1.18.28</lombok.version>
+        <commons.lang3.version>3.9</commons.lang3.version>
+        <commons.codec.version>1.15</commons.codec.version>
+        <xxl.job.version>2.3.0</xxl.job.version>
+
+        <aliyun.oss.version>3.8.0</aliyun.oss.version>
+        <kaptcha.version>1.1.0</kaptcha.version>
+
+        <jwt.version>0.9.0</jwt.version>
+        <sharding.jdbc.version>5.1.1</sharding.jdbc.version>
+        <skipTests>true</skipTests>
+        <junit.version>4.12</junit.version>
+        <druid.version>1.2.8</druid.version>
+        <fastjson.version>1.2.79</fastjson.version>
+        <hutool.version>5.8.27</hutool.version>
+        <knife4j.version>4.4.0</knife4j.version>
+
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
+        <!-- mybatis的分页插件-->
+        <pagehelper-starter.version>2.1.0</pagehelper-starter.version>
+
+        <mysql.version>8.0.30</mysql.version>
+        <redission.version>3.10.1</redission.version>
+
+        <!-- docker 镜像信息 -->
+        <docker.image.prefix>docker-prefix</docker.image.prefix>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- Hutool 工具类库 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- mybatis分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+
+
+            <!-- MyBatis Plus Starter：用于简化 MyBatis 的使用 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+
+            <!--jwt依赖-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+
+            <!-- MySQL 连接驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- Druid 数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- 引入 Lombok：简化 Java 开发中的代码 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+
+            <!--⽤于加密-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+
+            <!--分布式锁-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redission.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!-- swagger2-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <!--module不用添加打包版本信息-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <skip>true</skip>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

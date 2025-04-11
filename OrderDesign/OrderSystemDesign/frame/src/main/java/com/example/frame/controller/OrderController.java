@@ -6,7 +6,6 @@ import com.example.frame.aop.annotation.SysLogAnno;
 import com.example.frame.constant.RedisKey;
 import com.example.frame.controller.request.ProductRequest;
 import com.example.frame.enums.OperationEnum;
-import com.example.frame.interceptor.LoginInterceptor;
 import com.example.frame.model.JsonData;
 import com.example.frame.service.OrderService;
 import com.example.frame.utils.CommonUtil;
@@ -40,10 +39,10 @@ public class OrderController {
      * Generate order token to avoid repeating submission.
      * 生成订单令牌，避免重复提交
      */
-    @ApiOperation(value = "生成订单令牌")
     @GetMapping("/token")
+    @SysLogAnno(description = "生成订单令牌", operateType = OperationEnum.ADD)
     public JsonData getOrderToken() {
-        String accountNo = "13599289312";
+        String accountNo = "testAccountNo";
         String token = CommonUtil.getStringNumRandom(32);
 
         String key = String.format(RedisKey.SUBMIT_ORDER_TOKEN_KEY, accountNo, token);
@@ -55,11 +54,9 @@ public class OrderController {
         return JsonData.buildSuccess(token);
     }
 
-
-    @ApiOperation(value = "确认订单，等待支付")
-    @SysLogAnno(description = "确认订单，等待支付", operateType = OperationEnum.ADD)
     @PostMapping("/confirm")
     @RepeatSubmit
+    @SysLogAnno(description = "确认订单，等待支付", operateType = OperationEnum.ADD)
     public JsonData confirmOrder(@RequestBody ProductRequest productRequest) {
         return orderService.confirmOrder(productRequest);
     }

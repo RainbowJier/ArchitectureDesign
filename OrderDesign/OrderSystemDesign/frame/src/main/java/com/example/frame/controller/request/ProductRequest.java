@@ -13,12 +13,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ProductRequest {
 
-    @ApiModelProperty(value = "产品ID")
-    private String productId;
+    private String id;
 
-    @ApiModelProperty(value = "产品名称")
-    private String productName;
+    private String name;
 
-    @ApiModelProperty(value = "产品信息")
-    private String productDescription;
+    private String description;
 }

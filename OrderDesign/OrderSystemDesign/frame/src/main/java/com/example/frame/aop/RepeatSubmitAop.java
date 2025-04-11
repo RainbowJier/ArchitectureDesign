@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 @Slf4j
+@Order(1)
 public class RepeatSubmitAop {
 
     @Autowired
@@ -61,9 +63,9 @@ public class RepeatSubmitAop {
      */
     public void handleBefore(HttpServletRequest request) {
         // 账号
-        String accountNo = "13599829312";
+        String accountNo = "testAccountNo";
         // token 令牌
-        String requestToken = request.getHeader("request-token");
+        String requestToken = request.getHeader("order_token");
 
         // 防重标志
         boolean flag;

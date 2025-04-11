@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
             EventMessage orderMessage = new EventMessage();
             orderMessage
                     .setBizId(orderId)    // 订单 id
-                    .setContent(productRequest.getProductName());
+                    .setContent(productRequest.getName());
 
             // 发送消息
             rabbitTemplate.convertAndSend(
@@ -58,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
     public void handleCloseOrder(EventMessage eventMessage) {
         String content = eventMessage.getContent();
 
+        // 订单 id
         String orderId = eventMessage.getBizId();
 
         // todo：取消订单
